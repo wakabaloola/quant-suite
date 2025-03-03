@@ -1,0 +1,44 @@
+#header {
+    background: #1e3a5f;
+    color: white;
+}
+
+#branding h1 {
+    font-family: 'Courier Prime', monospace;
+}
+
+#branding h1 a {
+    color: white !important;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #1e3a5f;
+}
+
+div.breadcrumbs {
+    background: #2b5083;
+}
+
+a:link, a:visited {
+    color: #1e3a5f;
+}
+
+.selector-chosen h2 {
+    background: #1e3a5f !important;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #1e3a5f;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #2b5083;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: #2b5083;
+}
+
+.button.default:hover, input[type=submit].default:hover {
+    background: #3b6093;
+}

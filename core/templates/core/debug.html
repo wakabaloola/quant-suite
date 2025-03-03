@@ -1,0 +1,28 @@
+<!-- core/templates/core/debug.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Debug Page{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Debugging LaTeX and Code Rendering</h1>
+    
+    <h2>LaTeX Test</h2>
+    <p>Inline LaTeX: $e=mc^2$</p>
+    <p>Block LaTeX:</p>
+    <div>
+        $$C = S_0 N(d_1) - Ke^{-rT} N(d_2)$$
+    </div>
+    
+    <h2>Code Test</h2>
+    <pre><code class="language-python">
+def monte_carlo_option_price(S0, K, r, sigma, T, n_simulations=10000):
+    import numpy as np
+    z = np.random.standard_normal(n_simulations)
+    ST = S0 * np.exp((r - 0.5 * sigma**2) * T + sigma * np.sqrt(T) * z)
+    payoff = np.maximum(ST - K, 0)
+    return np.exp(-r * T) * np.mean(payoff)
+    </code></pre>
+</div>
+{% endblock %}
