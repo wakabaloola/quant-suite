@@ -1,0 +1,78 @@
+<!-- glossary/templates/glossary/glossary_list.html -->
+{% extends "base.html" %}
+
+{% block title %}Financial Glossary - QuantSuite.io{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">Financial Glossary</h1>
+<p class="lead">Browse our comprehensive dictionary of financial terms and concepts.</p>
+
+<!-- Alphabet filter -->
+<div class="card mb-4">
+    <div class="card-header">
+        Filter by First Letter
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-wrap">
+            <a href="{% url 'glossary:glossary_list' %}" class="btn btn-outline-primary m-1">All</a>
+            {% for letter in letters %}
+            <a href="{% url 'glossary:glossary_list' %}?letter={{ letter }}" class="btn btn-outline-primary m-1">{{ letter }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Category filter -->
+{% if categories %}
+<div class="card mb-4">
+    <div class="card-header">
+        Filter by Category
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-wrap">
+            <a href="{% url 'glossary:glossary_list' %}" class="btn btn-outline-secondary m-1">All</a>
+            {% for category in categories %}
+            {% if category %}
+            <a href="{% url 'glossary:glossary_list' %}?category={{ category }}" class="btn btn-outline-secondary m-1">{{ category }}</a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Terms list -->
+<div class="card">
+    <div class="card-header">
+        {% if request.GET.letter %}
+            Terms starting with "{{ request.GET.letter }}"
+        {% elif request.GET.category %}
+            Terms in category "{{ request.GET.category }}"
+        {% else %}
+            All Terms
+        {% endif %}
+    </div>
+    <div class="card-body">
+        {% if terms %}
+            <div class="row">
+                {% for term in terms %}
+                <div class="col-md-4 mb-3">
+                    <a href="{% url 'glossary:glossary_detail' term.slug %}" class="text-decoration-none">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ term.term }}</h5>
+                                {% if term.category %}
+                                <span class="badge bg-light text-secondary">{{ term.category }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No terms found matching your criteria.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

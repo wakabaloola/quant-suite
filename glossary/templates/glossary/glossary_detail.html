@@ -1,0 +1,83 @@
+<!-- glossary/templates/glossary/glossary_detail.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ term.term }} - Financial Glossary - QuantSuite.io{% endblock %}
+
+{% block extra_head %}
+<!-- Include MathJax for LaTeX rendering -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- Include Prism.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mt-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'glossary:glossary_list' %}">Glossary</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ term.term }}</li>
+    </ol>
+</nav>
+
+<!-- Main term content - now takes full width -->
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">{{ term.term }}</h1>
+        {% if term.category %}
+        <span class="badge bg-light text-secondary">{{ term.category }}</span>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <!-- Display the markdown content -->
+        <div class="markdown-content">
+            {{ term.formatted_definition }}
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        Last updated: {{ term.updated_at|date:"F j, Y" }}
+    </div>
+</div>
+
+<!-- Related terms moved below the main content -->
+{% if related_terms %}
+<div class="card mb-4">
+    <div class="card-header">
+        Related Terms
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for related in related_terms %}
+            <div class="col-md-3 mb-2">
+                <a href="{% url 'glossary:glossary_detail' related.slug %}" class="text-decoration-none">
+                    <div class="card h-100">
+                        <div class="card-body py-2">
+                            <p class="card-text mb-0">{{ related.term }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Initialize MathJax -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // This ensures MathJax processes the content after the page loads
+        if (typeof MathJax !== 'undefined') {
+            MathJax.typeset();
+        }
+
+        // This ensures Prism.js highlights code after the page loads
+        if (typeof Prism !== 'undefined') {
+            Prism.highlightAll();
+        }
+    });
+</script>
+{% endblock %}
