@@ -1,11 +1,11 @@
-# blog/views.py
+# research/views.py
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Post
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'research/post_list.html'
     context_object_name = 'posts'
     paginate_by = 10
 

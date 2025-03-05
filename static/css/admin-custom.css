@@ -1,44 +1,148 @@
+/* Main admin styles */
+:root {
+  --primary: #1e3a5f; 
+  --primary-light: #2c5694;
+  --primary-dark: #162c49;
+  --accent: #00a8cc;
+  --light-border: #e0e6ef;
+  --hover-blue: #3678c7; /* Consistent hover color */
+}
+
+/* Header - force the correct blue */
 #header {
-    background: #1e3a5f;
+    background: #1e3a5f !important;
     color: white;
 }
 
 #branding h1 {
-    font-family: 'Courier Prime', monospace;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
 }
 
 #branding h1 a {
     color: white !important;
 }
 
-.module h2, .module caption, .inline-group h2 {
-    background: #1e3a5f;
+/* User tools */
+#user-tools {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
 }
 
+/* Breadcrumbs - already the right color */
 div.breadcrumbs {
-    background: #2b5083;
+    background: #2c5694 !important;
 }
 
+/* Module headers - use a lighter blue for better readability */
+.module h2, 
+.module caption, 
+.inline-group h2,
+#changelist-filter h2 {
+    background: #2c5694 !important; /* Lighter blue for better readability */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: white !important; /* Ensure text is white */
+}
+
+/* Target long headers specifically */
+.app-auth h2 {
+    font-size: 0.7rem !important;
+    letter-spacing: -0.5px;
+}
+
+/* Links */
 a:link, a:visited {
     color: #1e3a5f;
 }
 
+a:hover {
+    color: #00a8cc;
+}
+
+/* All buttons in admin - ensure consistent style */
+.button, 
+input[type=submit], 
+input[type=button], 
+.submit-row input, 
+a.button,
+#changelist-search input[type="submit"],
+input[type="button"][value="Go"] {
+    background: #2c5694 !important;
+    color: white !important;
+}
+
+/* All button hover states - ensure consistency */
+.button:hover, 
+input[type=submit]:hover, 
+input[type=button]:hover, 
+.submit-row input:hover, 
+a.button:hover,
+#changelist-search input[type="submit"]:hover,
+input[type="button"][value="Go"]:hover {
+    background: #3678c7 !important; /* Same hover color for all buttons */
+}
+
+/* Default/primary buttons */
+.button.default, 
+input[type=submit].default, 
+.submit-row input.default {
+    background: #2c5694 !important;
+    color: white !important;
+}
+
+/* Default/primary buttons hover */
+.button.default:hover, 
+input[type=submit].default:hover, 
+.submit-row input.default:hover {
+    background: #3678c7 !important;
+}
+
+/* Selector lists */
 .selector-chosen h2 {
-    background: #1e3a5f !important;
+    background: #2c5694 !important;
 }
 
-.button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #1e3a5f;
+/* Reset default filter styles to avoid layout issues */
+#changelist-filter {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid var(--light-border);
+    border-left: none;
 }
 
-.button.default, input[type=submit].default, .submit-row input.default {
-    background: #2b5083;
+.change-list .filtered .results, 
+.change-list .filtered .paginator, 
+.filtered #toolbar, 
+.filtered div.xfull {
+    margin-right: 0;
 }
 
-.button:hover, input[type=submit]:hover, input[type=button]:hover {
-    background: #2b5083;
+/* Make module containers respect available space */
+.dashboard .module {
+    box-sizing: border-box;
+    width: 100%;
 }
 
-.button.default:hover, input[type=submit].default:hover {
-    background: #3b6093;
+/* Ensure content doesn't overflow */
+body, #container {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Calendar header */
+.calendar caption {
+    background: #2c5694 !important;
+}
+
+/* Object tools */
+.object-tools a:link, .object-tools a:visited {
+    background: #2c5694 !important;
+    color: white !important;
+}
+
+.object-tools a:hover {
+    background: #3678c7 !important;
 }

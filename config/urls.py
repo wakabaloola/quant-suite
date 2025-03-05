@@ -23,9 +23,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('blog/', include('blog.urls')),
-    path('markdownx/', include('markdownx.urls'))
-]
+    path('research/', include('blog.urls', namespace='blog')),
+    path('markdownx/', include('markdownx.urls')),
+    path('glossary/', include('glossary.urls', namespace='glossary')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Serve media files in development
 if settings.DEBUG:

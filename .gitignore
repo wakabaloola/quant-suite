@@ -21,6 +21,8 @@ ENV/
 .vscode/
 *.swp
 *.swo
+*.swm
+*.swn
 
 # OS specific
 .DS_Store

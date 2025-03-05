@@ -1,5 +1,6 @@
 # glossary/models.py
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from markdownx.models import MarkdownxField
 from django.utils.safestring import mark_safe
@@ -72,3 +73,11 @@ class GlossaryTerm(models.Model):
 
         # Return marked safe HTML
         return mark_safe(clean_html)
+
+    def get_absolute_url(self):
+        """
+        Returns the URL to access a particular glossary term instance on the website.
+
+        This enables the "View on Site" button in the admin interface.
+        """
+        return reverse('glossary:glossary_detail', args=[self.slug])

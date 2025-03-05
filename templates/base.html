@@ -1,3 +1,4 @@
+<!-- templates/base.html-- >
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Prism CSS for code highlighting - using okaidia theme -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet"> dark code background -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
     <!-- Additional Prism plugins for better highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
     <!-- Your custom CSS -->
@@ -35,22 +37,25 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg mb-4" style="background-color: #1e3a5f;">
+    <nav class="navbar navbar-expand-lg mb-4">
         <div class="container">
-            <a class="navbar-brand text-dark" href="/">QuantSuite.io</a>
+            <a class="navbar-brand" href="{% url 'core:home' %}">quantsuite.io</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/">Home</a>
+                        <a class="nav-link" href="{% url 'core:home' %}">home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/blog/">Blog</a>
+                        <a class="nav-link" href="{% url 'blog:post_list' %}">research</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/about/">About</a>
+                        <a class="nav-link" href="{% url 'glossary:glossary_list' %}">glossary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:about' %}">about</a>
                     </li>
                 </ul>
             </div>

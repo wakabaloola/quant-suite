@@ -1,14 +1,19 @@
+<!-- templates/admin/base_site.html -->
 {% extends "admin/base.html" %}
 {% load static %}
 
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/admin-custom.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 {% endblock %}
 
-{% block title %}{{ title }} | quantsuite.io Admin{% endblock %}
+{% block title %}{{ title }} | quantsuite.io admin{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">QuantSuite.io Administration</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}">quantsuite.io admin</a></h1>
 {% endblock %}
+
+{% block nav-global %}{% endblock %}

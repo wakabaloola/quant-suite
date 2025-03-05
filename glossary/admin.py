@@ -14,3 +14,4 @@ class GlossaryTermAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     search_fields = ('term', 'definition')
     prepopulated_fields = {'slug': ('term',)}
+    view_on_site = True

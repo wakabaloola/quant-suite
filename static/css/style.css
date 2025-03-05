@@ -1,69 +1,221 @@
-/* static/css/style.css */
-.blog-content {
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
+/* static/css/style_new.css */
+/* QuantSuite.io style_new.css */
 
-footer {
-    margin-top: 3rem;
-}
-
-.navbar {
-    margin-bottom: 2rem;
-}
-
-
-/* Define custom color names */
+/* Color palette */
 :root {
-  --h1_colour: #333;
-  --main_text_colour: #666;
-  --link_colour: #3c5a9d;
-  --link_hover_colour: #007bff;
+  --primary: #1e3a5f; /* Keep your existing navy blue */
+  --primary-light: #2c5694; /* Lighter shade for hover states */
+  --primary-dark: #162c49; /* Darker shade for accents */
+  --accent: #00a8cc; /* Teal blue for highlights and CTAs */
+  --neutral-dark: #333333; /* For main text */
+  --neutral-medium: #555555; /* For secondary text */
+  --neutral-light: #f5f7fa; /* For backgrounds */
+  --success: #28a745; /* Green for positive indicators */
+  --warning: #ffc107; /* Yellow for caution indicators */
+  --danger: #dc3545; /* Red for negative indicators */
+  --light-border: #e0e6ef; /* Sophisticated border color */
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Subtle shadows */
+
+  /* Keep these from original */
   --code-bg: #f5f5f5;
   --math-bg: #f9f9f9;
-  --border-color: #e0e0e0;
+  --border-color: var(--light-border);
 }
 
-/* General styles */
+/* General typography */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--neutral-dark);
+  line-height: 1.6;
+  background-color: #fff;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin-top: 50px;
-}
-
-h1 {
-  color: var(--h1_colour);
-  text-align: center;
-}
-
-h2, h3, h4 {
-  color: var(--h1_colour);
-  text-align: left;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
 }
 
 p, ul, li {
-  color: var(--main_text_colour);
+  color: var(--neutral-medium);
   line-height: 1.6;
 }
 
-.references {
-  color: var(--main_text_colour); /* Set the color to match paragraph text */
-  line-height: 1.6; /* Set line height if needed */
-  /* Add any other styles you want to apply */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* LaTeX and Math styles */
+a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Navigation */
+.navbar {
+  background-color: var(--primary); /* Change navbar background to primary blue */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 0.75rem 0;
+  margin-bottom: 0;
+}
+
+.navbar-brand {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-size: 1.6rem;
+  color: white !important; /* Make brand text white */
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.text-accent {
+  color: var(--accent) !important;
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important; /* White with slight transparency */
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: white !important; /* Pure white on hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle light background on hover */
+  text-decoration: none;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Main content and layout */
+main.container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Footer styling */
+footer {
+  background-color: var(--neutral-light);
+  border-top: 1px solid var(--light-border);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+/* Card styling */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--light-border);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-shadow);
+}
+
+.card-header {
+  background-color: rgba(30, 58, 95, 0.03);
+  border-bottom: 1px solid var(--light-border);
+  font-weight: 500;
+}
+
+/* Financial-specific elements */
+.bg-primary-light {
+  background-color: rgba(30, 58, 95, 0.1);
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(30, 58, 95, 0.1);
+}
+
+/* Code samples */
+.code-sample {
+  border-radius: 8px;
+  border: 1px solid var(--light-border);
+  box-shadow: var(--card-shadow);
+}
+
+.code-sample pre {
+  margin: 0;
+  border-radius: 4px;
+}
+
+/* Financial data visualizations */
+.chart-placeholder {
+  height: 300px;
+  border: 1px solid var(--light-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* Hero section */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e3a5f' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* LaTeX and Math styles - kept from original */
 .latex, .mjx-math {
   display: block;
   margin: 20px 0;
@@ -75,9 +227,9 @@ p, ul, li {
   overflow-x: auto;
 }
 
-/* Code block styles */
+/* Code block styles - kept from original */
 pre, code {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
   background-color: var(--code-bg);
   border: 1px solid var(--border-color);
   border-radius: 4px;
@@ -99,13 +251,13 @@ pre code {
   background-color: transparent;
 }
 
-/* Fix for MathJax display */
+/* Fix for MathJax display - kept from original */
 .MathJax {
   overflow-x: auto;
   overflow-y: hidden;
 }
 
-/* Post content specific styles */
+/* Post content specific styles - kept from original */
 .post-content {
   margin-top: 25px;
   line-height: 1.7;
@@ -121,127 +273,7 @@ pre code {
   margin-top: 25px;
 }
 
-/* Additional styles from your original CSS */
-.tab {
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
-  background-color: #f9f9f9;
-}
-
-.tab button {
-  color: var(--h1_colour);
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-
-.tab button:hover {
-  color: #000;
-  background-color: #ddd;
-}
-
-.tab button.active {
-  background-color: #ccc;
-}
-
-.tabcontent {
-  display: block;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-
-/* my blue custom href link */
-.blue-link {
-  /* color: #007bff; Set the color for the links */
-  color: var(--link_colour);
-  /* font-weight: bold; Make the links slightly bolder */
-  text-decoration: none; /* Remove the underline */
-}
-
-/* becomes brighter blue and underlined on hover */
-.blue-link:hover {
-  color: var(--link_hover_colour);
-  /* font-weight: bold; uncomment to make the links slightly bolder on hover */
-  text-decoration: underline; /* replace with 'none' to remove the underline */
-}
-
-.link-icon {
-  color: #3c5a9d;
-  margin-left: 3px; /* Adjust margin as needed */
-  font-size: 0.9em; /* Adjust size of the icon */
-  text-decoration: none; /* no underlining */
-}
-
-.link-icon:hover {
-  margin-left: 3px;
-  color: #007bff;
-  font-size: 1em;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-/* The following is not being used except for one link in the strings section */
-.button-like {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff; /* Blue background color */
-    color: #fff; /* White text color */
-    text-decoration: none; /* Remove default underline */
-    border: 1px solid #007bff; /* Blue border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Show pointer cursor on hover */
-}
-
-.button-like:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    border-color: #0056b3; /* Darker blue border on hover */
-}
-
-/* Style the back button */
-.back-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 8px;
-}
-
-/* On hover, change background color */
-.back-button:hover {
-  background-color: #45a049;
-}
-
-
-/* Styling for post excerpts */
-.post-excerpt {
-    margin: 15px 0;
-    overflow: hidden;
-}
-
-.post-excerpt pre {
-    max-height: 150px;
-    overflow: hidden;
-}
-
-.post-excerpt .MathJax {
-    max-width: 100%;
-    overflow-x: auto;
-}
-
-
-/* Code highlighting enhancements */
+/* Code highlighting enhancements - kept from original */
 pre.line-numbers {
   position: relative;
   padding-left: 3.8em;
@@ -254,7 +286,7 @@ pre.line-numbers > code {
   white-space: inherit;
 }
 
-/* Finance-specific styling */
+/* Finance-specific styling - kept from original */
 .formula-block {
   background-color: rgba(240, 248, 255, 0.7);
   border-left: 3px solid #3498db;
@@ -285,79 +317,29 @@ pre.line-numbers > code {
   background-color: #f9f9f9;
 }
 
-/* Dark mode for code blocks (works with Prism Okaidia theme) */
-pre[class*="language-"] {
-  background: #f5f5f6;  /* Light gray background instead of dark */
-  color: #333;          /* Dark text color */
-  font-size: 0.9rem;    /* Smaller font size */
-  border: 1px solid #e0e0e0; /* Light border */
-  line-height: 1.4;     /* Tighter line spacing */
+/* Blog content styles - kept from original */
+.blog-content {
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
-/* Make sure code inside has matching styling */
-code[class*="language-"] {
-  font-size: 0.9rem;
-  color: #333;
-  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+/* Styling for post excerpts - kept from original */
+.post-excerpt {
+  margin: 15px 0;
+  overflow: hidden;
 }
 
-/* Update token colors for light background */
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: #6a9955;  /* Green for comments */
+.post-excerpt pre {
+  max-height: 150px;
+  overflow: hidden;
 }
 
-.token.punctuation {
-  color: #333;  /* Dark color for punctuation */
+.post-excerpt .MathJax {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  color: #098658;  /* Green for numbers/properties */
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: #a31515;  /* Red for strings */
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: #333;  /* Dark for operators */
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: #0000ff;  /* Blue for keywords */
-}
-
-.token.function,
-.token.class-name {
-  color: #795e26;  /* Brown for functions */
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  color: #dd4a68;  /* Pinkish for variables */
-}
-
-/* Improve equation rendering */
+/* Improve equation rendering - kept from original */
 .mjx-math {
   font-size: 110%;
 }
@@ -376,29 +358,58 @@ code[class*="language-"] {
     font-size: 100%;
     overflow-x: auto;
   }
+
+  .hero {
+    padding: 2rem 0;
+  }
 }
 
-/* Add this to your style.css */
-.navbar .nav-link:hover {
-  color: rgba(150, 150, 185, 0.95) !important;
-  text-decoration: underline;
+/* Clean, lighter code block styling */
+pre[class*="language-"],
+code[class*="language-"],
+pre,
+code {
+  background: #f5f8fc !important; /* Very light blue-gray */
+  border: 0px solid #e0e6ef !important;
+  border-radius: 4px;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  line-height: 1.3 !important;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
 }
 
-/* Better toggler visibility on mobile */
-.navbar-toggler {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+/* Remove any unwanted decorations */
+pre[class*="language-"]::before,
+pre[class*="language-"]::after,
+code[class*="language-"]::before,
+code[class*="language-"]::after {
+  display: none !important;
+  content: none !important;
 }
 
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+/* Improve spacing and remove line decorations */
+pre[class*="language-"] {
+  padding: 1em !important;
+  margin: 1em 0 !important;
+  overflow: auto !important;
+  background-image: none !important;
 }
 
-/* Typewriter font for site title */
-.navbar-brand {
-  font-family: 'Courier Prime', monospace;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  font-size: 1.4rem;
+/* Ensure inline code uses the same style */
+:not(pre) > code {
+  background: #f5f8fc !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 3px !important;
+  border: 1px solid #e0e6ef !important;
 }
 
+/* Fix line numbers if being used */
+.line-numbers .line-numbers-rows {
+  border-right: 1px solid #ddd !important;
+  background: none !important;
+}
+
+.line-numbers-rows > span:before {
+  color: #999 !important;
+  text-shadow: none !important;
+}
