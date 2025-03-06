@@ -148,6 +148,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.codehilite',
     'markdown.extensions.toc',
     'markdown.extensions.tables',
+    'markdown.extensions.footnotes',
 ]
 
 # Site settings

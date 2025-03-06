@@ -1,20 +1,25 @@
 <!-- glossary/templates/glossary/glossary_detail.html -->
 {% extends "base.html" %}
 {% load static %}
-
 {% block title %}{{ term.term }} - Financial Glossary - QuantSuite.io{% endblock %}
-
 {% block extra_head %}
+{{ block.super }}
+<style>
+    .search-highlight {
+        background-color: #ffeb3b;
+        color: #000;
+        padding: 0 3px;
+        border-radius: 2px;
+    }
+</style>
 <!-- Include MathJax for LaTeX rendering -->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
 <!-- Include Prism.js for syntax highlighting -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
 {% endblock %}
-
 {% block content %}
 <nav aria-label="breadcrumb" class="mt-4">
     <ol class="breadcrumb">
@@ -22,7 +27,6 @@
         <li class="breadcrumb-item active" aria-current="page">{{ term.term }}</li>
     </ol>
 </nav>
-
 <!-- Main term content - now takes full width -->
 <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -41,7 +45,6 @@
         Last updated: {{ term.updated_at|date:"F j, Y" }}
     </div>
 </div>
-
 <!-- Related terms moved below the main content -->
 {% if related_terms %}
 <div class="card mb-4">
@@ -65,18 +68,53 @@
     </div>
 </div>
 {% endif %}
+{% endblock %}
 
-<!-- Initialize MathJax -->
+{% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // This ensures MathJax processes the content after the page loads
         if (typeof MathJax !== 'undefined') {
             MathJax.typeset();
         }
-
         // This ensures Prism.js highlights code after the page loads
         if (typeof Prism !== 'undefined') {
             Prism.highlightAll();
+        }
+        
+        // Highlight search term if it exists
+        const urlParams = new URLSearchParams(window.location.search);
+        const highlightTerm = urlParams.get('highlight');
+        
+        if (highlightTerm && highlightTerm.length > 0) {
+            const contentElement = document.querySelector('.markdown-content');
+            
+            if (contentElement) {
+                // More aggressive approach - use innerHTML and regex replacement
+                const content = contentElement.innerHTML;
+                const termRegex = new RegExp(highlightTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
+                
+                // Don't replace within HTML tags
+                const newContent = content.replace(
+                    /(<[^>]*>)|([\s\S]*?)(?=<|$)/g,
+                    function(match, tag, text) {
+                        // If it's a tag, return it unchanged
+                        if (tag) return tag;
+                        // If it's text, perform the highlight replacement
+                        return text.replace(termRegex, '<span class="search-highlight">$&</span>');
+                    }
+                );
+                
+                contentElement.innerHTML = newContent;
+                
+                // Scroll to the first highlight
+                const firstHighlight = document.querySelector('.search-highlight');
+                if (firstHighlight) {
+                    setTimeout(() => {
+                        firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+            }
         }
     });
 </script>

@@ -1,0 +1,38 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Direct override in the specific admin template */
+    .form-row div.markdownx,
+    .form-row textarea.markdownx-editor,
+    .markdownx-container,
+    .markdownx-preview,
+    .aligned .form-row > div {
+        width: 100% !important;
+        max-width: none !important;
+        float: none !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Override Django's column layout */
+    .form-row {
+        overflow: visible;
+        padding: 8px 12px;
+        display: block;
+    }
+    
+    /* Remove any margin or padding constraints */
+    #content-main form {
+        margin-right: 0 !important;
+    }
+    
+    /* Override default flex layout */
+    .aligned label + div {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+</style>
+{% endblock %}

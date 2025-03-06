@@ -1,4 +1,4 @@
-# research/models.py
+# blog/models.py
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -35,25 +35,43 @@ class Post(models.Model):
     
     def formatted_markdown(self):
         """
-        Method to display formatted markdown content with rendered LaTeX and code highlighting
+        Method to display formatted markdown content with rendered LaTeX, code highlighting, and footnotes
         """
-        # Get the standard Markdown conversion from markdownx
-        html = markdownify(self.content)
+        # Convert markdown to HTML with extensions including TOC
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.footnotes',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.tables',
+            'markdown.extensions.fenced_code',
+            'markdown.extensions.toc'  # Add TOC extension for heading IDs
+        ])
+        html = md.convert(self.content)
         
-        # Define allowed HTML tags and attributes
+        # Add the rest of your existing code for sanitization
+        # Important: Make sure 'id' is in the allowed attributes for headings
         allowed_tags = list(ALLOWED_TAGS) + ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 
                                 'img', 'pre', 'code', 'blockquote', 'em', 
                                 'strong', 'ul', 'ol', 'li', 'span', 'div',
                                 'table', 'thead', 'tbody', 'tr', 'th', 'td',
-                                'hr', 'br', 'a']
+                                'hr', 'br', 'a', 'sup', 'section', 'ol']
         allowed_attrs = ALLOWED_ATTRIBUTES.copy()
         allowed_attrs.update({
             'img': ['src', 'alt', 'title', 'class'],
-            'a': ['href', 'title', 'class', 'target', 'rel'],
+            'a': ['href', 'title', 'class', 'target', 'rel', 'id'],
             'code': ['class'],
             'pre': ['class'],
             'span': ['class', 'style'],
-            'div': ['class', 'style']
+            'div': ['class', 'style'],
+            'section': ['class', 'id'],
+            'ol': ['class', 'start'],
+            'li': ['id'],
+            'sup': ['id', 'class'],
+            'h1': ['id'],
+            'h2': ['id'],
+            'h3': ['id'],
+            'h4': ['id'],
+            'h5': ['id'],
+            'h6': ['id']  # Allow IDs on all heading levels
         })
         
         # Look for <pre><code> without a class and add language-python

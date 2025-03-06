@@ -1,0 +1,68 @@
+<!-- core/templates/core/search_results.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Results - quantsuite.io{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="h3 mb-4">Site-Wide Search Results</h1>
+    
+    <form action="{% url 'core:site_search' %}" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search across the site..." value="{{ query }}">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+    
+    {% if query %}
+        <p>Found {{ total_count }} result{{ total_count|pluralize }} for "{{ query }}"</p>
+        
+        {% if blog_count > 0 or glossary_count > 0 %}
+            <!-- Research Results -->
+            {% if blog_count > 0 %}
+                <h2 class="h4 mt-4 mb-3">Research Notes ({{ blog_count }})</h2>
+                <div class="list-group mb-4">
+                    {% for post in blog_results %}
+                        <a href="{{ post.get_absolute_url }}?highlight={{ query|urlencode }}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ post.title }}</h5>
+                                <small class="text-muted">{{ post.created_at|date:"F j, Y" }}</small>
+                            </div>
+                            <p class="mb-1">{{ post.content|striptags|truncatechars:150 }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <!-- Glossary Results -->
+            {% if glossary_count > 0 %}
+                <h2 class="h4 mt-4 mb-3">Glossary Terms ({{ glossary_count }})</h2>
+                <div class="list-group mb-4">
+                    {% for term in glossary_results %}
+                        <a href="{{ term.get_absolute_url }}?highlight={{ query|urlencode }}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ term.term }}</h5>
+                                {% if term.category %}
+                                    <small class="text-muted">{{ term.category }}</small>
+                                {% endif %}
+                            </div>
+                            <p class="mb-1">{{ term.definition|striptags|truncatechars:150 }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-info">
+                No results found matching your search.
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-secondary">
+            Enter a search term to find content across the site.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

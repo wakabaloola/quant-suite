@@ -1,5 +1,5 @@
-/* static/css/style_new.css */
-/* QuantSuite.io style_new.css */
+/* static/css/style.css */
+/* QuantSuite.io style.css */
 
 /* Color palette */
 :root {
@@ -101,6 +101,21 @@ a:hover {
 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Navbar search form alignment */
+.navbar .form-control {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    line-height: 1.5;
+}
+
+.navbar .input-group .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
 }
 
 /* Main content and layout */
@@ -412,4 +427,47 @@ pre[class*="language-"] {
 .line-numbers-rows > span:before {
   color: #999 !important;
   text-shadow: none !important;
+}
+
+/* Footnote styles */
+.footnote {
+    font-size: 0.85em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+.footnote-ref {
+    font-size: 0.85em;
+    vertical-align: super;
+    line-height: 0;
+    color: var(--primary);
+}
+
+.footnotes {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-border);
+}
+
+.footnote-backref {
+    text-decoration: none;
+    margin-left: 0.5em;
+    color: var(--primary);
+}
+
+.footnote-backref:hover {
+    color: var(--accent);
+}
+
+.research-content a,
+.markdown-content a,
+.definition-content a {
+    color: var(--primary);         /* Your navy blue color */
+    text-decoration: underline;
+}
+
+.research-content a:hover,
+.markdown-content a:hover,
+.definition-content a:hover {
+    color: var(--primary-light);   /* Your lighter blue */
 }

@@ -4,8 +4,20 @@
 {% block title %}Financial Glossary - QuantSuite.io{% endblock %}
 
 {% block content %}
-<h1 class="mt-4 mb-4">Financial Glossary</h1>
-<p class="lead">Browse our comprehensive dictionary of financial terms and concepts.</p>
+<h1 class="mt-4 mb-4">Glossary</h1>
+<p class="lead">A dictionary of technical, financial and statistical terms and concepts.</p>
+
+<!-- Search functionality -->
+<div class="mb-4">
+    <form action="{% url 'glossary:search_glossary' %}" method="get">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search glossary...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <!-- Alphabet filter -->
 <div class="card mb-4">

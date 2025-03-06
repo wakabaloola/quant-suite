@@ -146,3 +146,167 @@ body, #container {
 .object-tools a:hover {
     background: #3678c7 !important;
 }
+
+/* MarkdownX Editor Improvements - Responsive */
+.markdownx-editor {
+    resize: vertical;
+    min-height: 400px !important;
+    width: 100% !important; /* Base width */
+    max-height: 800px;
+    overflow-y: auto !important;
+    line-height: 1.5;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    border: 1px solid var(--light-border);
+    border-radius: 4px;
+    padding: 10px;
+    box-sizing: border-box; /* Important for proper sizing */
+}
+
+/* Fix the auto-growing textarea issue */
+.markdownx-editor:focus {
+    height: auto !important;
+}
+
+/* Make field containers responsive */
+.field-definition,
+.field-content {
+    width: 100% !important;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Make form rows responsive */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Allow field containers to fill available width */
+.form-row > div {
+    flex: 1;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure the preview area is properly sized and responsive */
+.markdownx-preview {
+    width: 100% !important;
+    padding: 15px;
+    border: 1px solid var(--light-border);
+    border-radius: 4px;
+    margin-top: 10px;
+    min-height: 300px;
+    overflow-y: auto;
+    background-color: #fcfcfc;
+    box-sizing: border-box;
+}
+
+/* Style improvements for the markdownx container - make it responsive */
+.markdownx-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Adjust form field width and parent containers */
+.module .form-row div.field-box {
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Make label and input container responsive */
+fieldset .form-row {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments for various screen sizes */
+@media (max-width: 1024px) {
+    .form-row > div.field-box {
+        width: 100% !important;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .markdownx-editor {
+        min-height: 300px !important;
+    }
+}
+
+/* Force full width for MarkdownX editor and related elements */
+.markdownx-editor,
+.form-row .markdownx-editor,
+#id_definition,
+textarea.markdownx-editor,
+div.markdownx > textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex: 1 1 100% !important;
+}
+
+/* Ensure the field wrapper takes full width */
+.field-definition,
+.form-row > div,
+.field-box,
+div.markdownx,
+.markdownx-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-right: 0 !important;
+    flex: 1 1 100% !important;
+}
+
+/* Override Django's default column layout */
+.colM .aligned .form-row {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Specifically target Django's admin layout classes */
+.colM .aligned .form-row > div {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    float: none;
+    display: block;
+}
+
+/* Override any flex constraints */
+.aligned label + div.markdownx {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix for any fieldset or module constraints */
+fieldset.module div.markdownx,
+fieldset.module .form-row,
+fieldset.module .form-row > div {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Override any inline styles from markdownx.js */
+[style*="width"] {
+    max-width: 100% !important;
+}
+
+/* Override Django's column layout for aligned forms */
+.aligned .form-row > div {
+    width: 100% !important;
+}

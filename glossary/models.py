@@ -41,32 +41,47 @@ class GlossaryTerm(models.Model):
 
     def formatted_definition(self):
         """
-        Render the markdown content with LaTeX and code highlighting support.
-
+        Render the markdown content with LaTeX, code highlighting, and footnotes support.
         Returns:
             str: HTML-formatted definition with LaTeX and code syntax highlighting
         """
         # Define allowed HTML tags and attributes
         allowed_tags = list(ALLOWED_TAGS) + ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-                                 'img', 'pre', 'code', 'blockquote', 'em',
-                                 'strong', 'ul', 'ol', 'li', 'span', 'div',
-                                 'table', 'thead', 'tbody', 'tr', 'th', 'td',
-                                 'hr', 'br', 'a']
+                                'img', 'pre', 'code', 'blockquote', 'em',
+                                'strong', 'ul', 'ol', 'li', 'span', 'div',
+                                'table', 'thead', 'tbody', 'tr', 'th', 'td',
+                                'hr', 'br', 'a', 'sup', 'section', 'ol']
         allowed_attrs = ALLOWED_ATTRIBUTES.copy()
         allowed_attrs.update({
             'img': ['src', 'alt', 'title', 'class'],
-            'a': ['href', 'title', 'class'],
+            'a': ['href', 'title', 'class', 'target', 'rel', 'id'],
             'code': ['class'],
             'pre': ['class'],
             'span': ['class', 'style'],
-            'div': ['class', 'style']
+            'div': ['class', 'style'],
+            'section': ['class', 'id'],
+            'ol': ['class', 'start'],
+            'li': ['id'],
+            'sup': ['id', 'class'],
+            'h1': ['id'],
+            'h2': ['id'],
+            'h3': ['id'],
+            'h4': ['id'],
+            'h5': ['id'],
+            'h6': ['id']  # Allow IDs on all heading levels
         })
 
-        # Convert markdown to HTML
-        html = markdown.markdown(
-            self.definition,
-            extensions=['extra', 'codehilite', 'sane_lists', 'tables']
-        )
+        # Convert markdown to HTML with footnotes support
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',  # Includes tables, footnotes, etc.
+            'markdown.extensions.codehilite',
+            'markdown.extensions.sane_lists',
+            'markdown.extensions.footnotes',  # Explicitly include footnotes
+            'markdown.extensions.tables',
+            'markdown.extensions.fenced_code',
+            'markdown.extensions.toc' # Add TOC extension for heading IDs
+        ])
+        html = md.convert(self.definition)
 
         # Sanitize HTML
         clean_html = bleach.clean(html, tags=allowed_tags, attributes=allowed_attrs)

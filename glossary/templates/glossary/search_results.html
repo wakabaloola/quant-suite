@@ -1,0 +1,55 @@
+<!-- glossary/templates/glossary/search_results.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Glossary Search Results - quantsuite.io{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'glossary:glossary_list' %}">Glossary</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">Glossary Search Results</h1>
+
+    <form action="{% url 'glossary:search_glossary' %}" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search glossary..." value="{{ query }}">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    {% if query %}
+        <p>Found {{ count }} result{{ count|pluralize }} for "{{ query }}"</p>
+
+        {% if results %}
+            <div class="list-group mb-4">
+                {% for term in results %}
+                    <a href="{{ term.get_absolute_url }}?highlight={{ query|urlencode }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ term.term }}</h5>
+                            {% if term.category %}
+                                <small class="text-muted">{{ term.category }}</small>
+                            {% endif %}
+                        </div>
+                        <p class="mb-1">{{ term.definition|striptags|truncatechars:150 }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No glossary terms found matching your search.
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-secondary">
+            Enter a search term to find glossary entries.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
